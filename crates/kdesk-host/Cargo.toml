@@ -1,0 +1,31 @@
+[package]
+name = "kdesk-host"
+description = "kDesk Linux host: virtual screen over the desktop portal, H.264 out, touch in"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "kdesk-host"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+ashpd = { version = "0.14", default-features = false, features = ["tokio", "remote_desktop", "screencast"] }
+kdesk-proto = { path = "../kdesk-proto" }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "io-util", "sync", "time", "signal"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+gstreamer = { version = "0.25", optional = true }
+gstreamer-app = { version = "0.25", optional = true }
+gstreamer-video = { version = "0.25", optional = true }
+reis = { version = "0.7.1", features = ["tokio"] }
+futures-util = "0.3"
+
+[features]
+default = ["gst"]
+# The GStreamer encode pipeline. Needs the GStreamer dev packages to build.
+# `--no-default-features` builds everything else (portal, input, server).
+gst = ["dep:gstreamer", "dep:gstreamer-app", "dep:gstreamer-video"]

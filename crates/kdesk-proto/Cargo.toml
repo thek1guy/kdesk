@@ -1,0 +1,10 @@
+[package]
+name = "kdesk-proto"
+description = "Wire protocol shared by the kDesk host and the Android client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+thiserror = "2"

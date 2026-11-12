@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = ["crates/kdesk-proto", "crates/kdesk-host"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+authors = ["k1"]
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
